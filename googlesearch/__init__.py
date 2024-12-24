@@ -2,14 +2,15 @@
 from time import sleep
 from bs4 import BeautifulSoup
 from requests import get
-from .user_agents import get_useragent
+from fake_useragent import UserAgent
 
+ua = UserAgent(platforms=['desktop'])
 
 def _req(term, results, lang, start, proxies, timeout, safe, ssl_verify, region):
     resp = get(
         url="https://www.google.com/search",
         headers={
-            "User-Agent": get_useragent()
+            "User-Agent": ua.random
         },
         params={
             "q": term,
